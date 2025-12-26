@@ -23,9 +23,6 @@ Both tasks use the offline MNIST dataset (train/test IDX files). Each MNIST imag
 │  ├─ q2_confusion_matrix.png
 │  ├─ mnist_single_neuron.h5
 │  └─ mlp_mnist_model.h5
-├─ mnist.py
-├─ q1_mnist_single_neuron.py
-└─ q2_mlp_mnist.py
 
 > 
 ---
@@ -48,41 +45,7 @@ How labels are used in each question:
   - 1 = "not-0" (all digits 1–9)
 - Q2 (10-class): labels remain 0–9
 
----
 
-## Environment & Dependencies
-
-Recommended: Python 3.9+
-
-Install required packages:
-
-pip install numpy opencv-python scikit-learn matplotlib tensorflow
-
----
-
-## How to Run
-
-### Q1 — Single Neuron (0 vs not-0)
-
-python q1_mnist_single_neuron.py
-
-Outputs:
-
-* output/q1_confusion_matrix.png
-* output/mnist_single_neuron.h5
-
-### Q2 — MLP (0–9)
-
-python q2_mlp_mnist.py
-
-Outputs:
-
-* output/q2_confusion_matrix.png
-* output/mlp_mnist_model.h5
-
-> mnist.py is a helper module for reading IDX files; you do not run it directly.
-
----
 
 ## Results
 
@@ -123,79 +86,3 @@ Q2 Accuracy:
 * Accuracy = 5852 / 10000 = 0.5852 (58.52%)
 
 Short comment: Multi-class classification is harder with only 7 Hu Moments as input features, so the model mixes visually similar digits more often.
-
----
-
-## Code Snippets (Required in the Report)
-
-### 1) IDX File Reader (mnist.py)
-
-Core idea used to read MNIST IDX files:
-
-import struct
-import numpy as np
-
-def load_images(path):
-    with open(path, "rb") as f:
-        magic, num, rows, cols = struct.unpack(">IIII", f.read(16))
-        data = np.frombuffer(f.read(), dtype=np.uint8).reshape(num, rows, cols)
-    return data
-
-def load_labels(path):
-    with open(path, "rb") as f:
-        magic, num = struct.unpack(">II", f.read(8))
-        data = np.frombuffer(f.read(), dtype=np.uint8).reshape(num)
-    return data
-
-### 2) Feature Extraction (Hu Moments)
-
-Each image is converted into a 7D feature vector:
-
-import cv2
-import numpy as np
-
-hu = np.empty((len(images), 7), dtype=np.float32)
-for i, img in enumerate(images):
-    m = cv2.moments(img, True)
-    hu[i] = cv2.HuMoments(m).reshape(7)
-
-### 3) Model Definitions
-
-Q1 (single neuron / sigmoid):
-
-import tensorflow as tf
-
-model = tf.keras.Sequential([
-    tf.keras.layers.Dense(1, input_shape=[7], activation="sigmoid")
-])
-
-Q2 (MLP / softmax):
-
-from tensorflow import keras
-
-model = keras.Sequential([
-    keras.layers.Dense(100, input_shape=[7], activation="relu"),
-    keras.layers.Dense(100, activation="relu"),
-    keras.layers.Dense(10, activation="softmax")
-])
-
-Full implementations are available in:
-
-* q1_mnist_single_neuron.py
-* q2_mlp_mnist.py
-
----
-
-## Notes on Reading the Confusion Matrices
-
-* Rows (Y-axis) show the true classes.
-* Columns (X-axis) show the predicted classes.
-* Values on the diagonal are correct predictions.
-* Off-diagonal values indicate misclassifications.
-
-For Q1, the labels 0 and 1 are not digits "0" and "1":
-
-* 0 means digit 0
-* 1 means not-0 (digits 1–9)
-
----
