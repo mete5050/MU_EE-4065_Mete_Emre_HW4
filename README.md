@@ -1,4 +1,4 @@
-## Q1 (Book: Section 10.9) — Single Neuron Binary Classifier (0 vs not-0)
+<img width="640" height="480" alt="q2_confusion_matrix" src="https://github.com/user-attachments/assets/b59d3ebb-a87e-47ee-8b58-bd337d4e52a3" />## Q1 (Book: Section 10.9) — Single Neuron Binary Classifier (0 vs not-0)
 
 ### Objective
 In this task, we classify MNIST digits into two classes:
@@ -16,11 +16,11 @@ We use the offline MNIST IDX files:
 
 Train split
 - MNIST-dataset/train-images.idx3-ubyte → 60,000 grayscale images, each 28×28
-- MNIST-dataset/train-labels.idx1-ubyte → 60,000 labels (0–9)
+<img width="582" height="720" alt="mnist_train_samples_grid" src="https://github.com/user-attachments/assets/f6f4c913-537f-41ed-a822-39fc03a7c002" />
 
 Test split
 - MNIST-dataset/t10k-images.idx3-ubyte → 10,000 grayscale images, each 28×28
-- MNIST-dataset/t10k-labels.idx1-ubyte → 10,000 labels (0–9)
+<img width="582" height="720" alt="mnist_test_samples_grid" src="https://github.com/user-attachments/assets/ef095e8a-a2c5-49e6-9bef-81902d937e30" />
 
 How labels are prepared for Q1 (binary mapping):
 - If label == 0 → mapped label = 0
@@ -55,7 +55,8 @@ The original MNIST images are not directly fed to the classifier. Instead:
 ### Results (Test Set)
 Artifacts produced
 - Confusion matrix image: output/q1_confusion_matrix.png
-- Saved model: output/mnist_single_neuron.h5
+<img width="640" height="480" alt="q1_confusion_matrix" src="https://github.com/user-attachments/assets/fef694b7-0673-4696-b839-d1197940b13e" />
+
 
 Accuracy calculation
 From your confusion matrix:
@@ -120,7 +121,8 @@ The softmax layer outputs probabilities for the 10 digit classes.
 ### Results (Test Set)
 Artifacts produced
 - Confusion matrix image: output/q2_confusion_matrix.png
-- Saved model: output/mlp_mnist_model.h5
+  <img width="640" height="480" alt="q2_confusion_matrix" src="https://github.com/user-attachments/assets/7f02b109-b232-471c-a14d-b2bbf20f2c1b" />
+
 
 Accuracy calculation
 From the confusion matrix, the diagonal sum (correct predictions) is:
