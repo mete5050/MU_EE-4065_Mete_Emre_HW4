@@ -1,4 +1,5 @@
-<img width="640" height="480" alt="q2_confusion_matrix" src="https://github.com/user-attachments/assets/b59d3ebb-a87e-47ee-8b58-bd337d4e52a3" />## Q1 (Book: Section 10.9) — Single Neuron Binary Classifier (0 vs not-0)
+
+## Q1 (Book: Section 10.9) — Single Neuron Binary Classifier (0 vs not-0)
 
 ### Objective
 In this task, we classify MNIST digits into two classes:
